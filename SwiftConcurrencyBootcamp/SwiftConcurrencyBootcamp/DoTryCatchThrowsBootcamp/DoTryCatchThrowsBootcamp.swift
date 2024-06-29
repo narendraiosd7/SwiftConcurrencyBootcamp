@@ -35,6 +35,13 @@ class DoTryCatchThrowsBootcampManager {
     }
   }
   
+  func getTitle3() throws -> String {
+    if isActive {
+      return "Next text!"
+    } else {
+      throw URLError(.timedOut)
+    }
+  }
 }
 
 class DoTryCatchThrowsBootcampViewModel: ObservableObject {
@@ -54,12 +61,18 @@ class DoTryCatchThrowsBootcampViewModel: ObservableObject {
 //      text = error.localizedDescription
 //    }
     
-    let results = manager.getTitle2()
-    switch results {
-    case .success(let success):
-      self.text = success
-    case .failure(let failure):
-      self.text = failure.localizedDescription
+//    let results = manager.getTitle2()
+//    switch results {
+//    case .success(let success):
+//      self.text = success
+//    case .failure(let failure):
+//      self.text = failure.localizedDescription
+//    }
+    
+    do {
+      self.text = try manager.getTitle3()
+    } catch {
+      self.text = error.localizedDescription
     }
   }
 }
