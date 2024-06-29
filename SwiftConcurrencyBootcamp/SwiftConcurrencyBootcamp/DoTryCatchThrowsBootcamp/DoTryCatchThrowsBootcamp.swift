@@ -27,6 +27,14 @@ class DoTryCatchThrowsBootcampManager {
     }
   }
   
+  func getTitle2() -> Result<String, Error> {
+    if isActive {
+      return .success("Next text!")
+    } else {
+      return .failure(URLError(.unknown))
+    }
+  }
+  
 }
 
 class DoTryCatchThrowsBootcampViewModel: ObservableObject {
@@ -39,14 +47,20 @@ class DoTryCatchThrowsBootcampViewModel: ObservableObject {
 //      self.text = newTitle
 //    }
     
-    let results = manager.getTitle1()
-    if let newTitle = results.title {
-      text = newTitle
-    } else if let error = results.error {
-      text = error.localizedDescription
+//    let results = manager.getTitle1()
+//    if let newTitle = results.title {
+//      text = newTitle
+//    } else if let error = results.error {
+//      text = error.localizedDescription
+//    }
+    
+    let results = manager.getTitle2()
+    switch results {
+    case .success(let success):
+      self.text = success
+    case .failure(let failure):
+      self.text = failure.localizedDescription
     }
-    
-    
   }
 }
 
