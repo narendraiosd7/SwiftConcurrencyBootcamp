@@ -18,6 +18,15 @@ class DoTryCatchThrowsBootcampManager {
       return nil
     }
   }
+  
+  func getTitle1() -> (title: String?, error: Error?) {
+    if isActive {
+      return ("Next text!", nil)
+    } else {
+      return (nil, URLError(.badURL))
+    }
+  }
+  
 }
 
 class DoTryCatchThrowsBootcampViewModel: ObservableObject {
@@ -26,9 +35,18 @@ class DoTryCatchThrowsBootcampViewModel: ObservableObject {
   let manager = DoTryCatchThrowsBootcampManager()
   
   func fecthTitle() {
-    if let newTitle = manager.getTitle() {
-      self.text = newTitle
+//    if let newTitle = manager.getTitle() {
+//      self.text = newTitle
+//    }
+    
+    let results = manager.getTitle1()
+    if let newTitle = results.title {
+      text = newTitle
+    } else if let error = results.error {
+      text = error.localizedDescription
     }
+    
+    
   }
 }
 
