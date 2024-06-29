@@ -42,6 +42,15 @@ class DoTryCatchThrowsBootcampManager {
       throw URLError(.timedOut)
     }
   }
+  
+  func getTitle4() throws -> String {
+    isActive = true
+    if isActive {
+      return "Final text!"
+    } else {
+      throw URLError(.timedOut)
+    }
+  }
 }
 
 class DoTryCatchThrowsBootcampViewModel: ObservableObject {
@@ -50,29 +59,37 @@ class DoTryCatchThrowsBootcampViewModel: ObservableObject {
   let manager = DoTryCatchThrowsBootcampManager()
   
   func fecthTitle() {
-//    if let newTitle = manager.getTitle() {
-//      self.text = newTitle
-//    }
+    //    if let newTitle = manager.getTitle() {
+    //      self.text = newTitle
+    //    }
     
-//    let results = manager.getTitle1()
-//    if let newTitle = results.title {
-//      text = newTitle
-//    } else if let error = results.error {
-//      text = error.localizedDescription
-//    }
+    //    let results = manager.getTitle1()
+    //    if let newTitle = results.title {
+    //      text = newTitle
+    //    } else if let error = results.error {
+    //      text = error.localizedDescription
+    //    }
     
-//    let results = manager.getTitle2()
-//    switch results {
-//    case .success(let success):
-//      self.text = success
-//    case .failure(let failure):
-//      self.text = failure.localizedDescription
-//    }
+    //    let results = manager.getTitle2()
+    //    switch results {
+    //    case .success(let success):
+    //      self.text = success
+    //    case .failure(let failure):
+    //      self.text = failure.localizedDescription
+    //    }
     
-    do {
-      self.text = try manager.getTitle3()
-    } catch {
-      self.text = error.localizedDescription
+    //    do {
+    //      self.text = try manager.getTitle3()
+    //    } catch {
+    //      self.text = error.localizedDescription
+    //    }
+    
+    if let newTitle = try? manager.getTitle3() {
+      self.text = newTitle
+    }
+    
+    if let finalText = try? manager.getTitle4() {
+      self.text = finalText
     }
   }
 }
