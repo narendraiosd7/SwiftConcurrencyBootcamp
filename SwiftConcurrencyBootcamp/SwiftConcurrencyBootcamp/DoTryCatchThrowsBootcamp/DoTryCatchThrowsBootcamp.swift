@@ -84,12 +84,16 @@ class DoTryCatchThrowsBootcampViewModel: ObservableObject {
     //      self.text = error.localizedDescription
     //    }
     
-    if let newTitle = try? manager.getTitle3() {
-      self.text = newTitle
-    }
     
-    if let finalText = try? manager.getTitle4() {
-      self.text = finalText
+    
+    do {
+      if let newTitle = try? manager.getTitle3() {
+        self.text = newTitle
+      }
+      
+      self.text = try manager.getTitle4()
+    } catch {
+      self.text = error.localizedDescription
     }
   }
 }
